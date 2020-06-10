@@ -6,6 +6,10 @@ const
     bodyParser = require('body-parser'),
     app = express().use(bodyParser.json()); // creates express http server
 
+app.get("/", function (req, res) {
+    res.send("Deployed!");
+});
+
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {
 
