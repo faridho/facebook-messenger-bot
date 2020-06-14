@@ -76,7 +76,7 @@ function handleMessage(sender_psid, received_message) {
                         {
                             "type": "postback",
                             "title": "Select Menu",
-                            "payload": "menu",
+                            "payload": "menus",
                         },
                         {
                             "type": "postback",
@@ -99,7 +99,7 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload === 'menu') {
+    if (payload === 'menus') {
         response = {
             "attachment": {
                 "type": "template",
@@ -123,43 +123,34 @@ function handlePostback(sender_psid, received_postback) {
                             ]
                         },
                         {
-                            "title": "Classic White T-Shirt",
+                            "title": "Classic T-Shirt Collection",
                             "subtitle": "See all our colors",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
-                                "messenger_extensions": false,
-                                "webview_height_ratio": "tall"
-                            }
-                        },
-                        {
-                            "title": "Classic Blue T-Shirt",
-                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148832/KOREAN/CARD/pizza-2068272_640.jpg",
-                            "subtitle": "100% Cotton, 200% Comfortable",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
-                                "messenger_extensions": true,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                            },
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
                             "buttons": [
                                 {
-                                    "title": "Shop Now",
+                                    "title": "View",
                                     "type": "web_url",
-                                    "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
                                     "messenger_extensions": true,
                                     "webview_height_ratio": "tall",
                                     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
                                 }
                             ]
-                        }
-                    ],
-                    "buttons": [
+                        },
                         {
-                            "title": "View More",
-                            "type": "postback",
-                            "payload": "payload"
+                            "title": "Classic T-Shirt Collection",
+                            "subtitle": "See all our colors",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
+                            "buttons": [
+                                {
+                                    "title": "View",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
                         }
                     ]
                 }
