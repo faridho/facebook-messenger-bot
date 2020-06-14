@@ -26,7 +26,6 @@ app.post('/webhook', (req, res) => {
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
-                console.log(2)
                 handlePostback(sender_psid, webhook_event.postback);
             }
 
@@ -63,75 +62,7 @@ app.get('/webhook', (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-    let response;
-
-    if (received_message === 'menus') {
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "list",
-                    "top_element_style": "compact",
-                    "elements": [
-                        {
-                            "title": "Classic T-Shirt Collection",
-                            "subtitle": "See all our colors",
-                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
-                            "buttons": [
-                                {
-                                    "title": "View",
-                                    "type": "web_url",
-                                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
-                                    "messenger_extensions": true,
-                                    "webview_height_ratio": "tall",
-                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Classic White T-Shirt",
-                            "subtitle": "See all our colors",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
-                                "messenger_extensions": false,
-                                "webview_height_ratio": "tall"
-                            }
-                        },
-                        {
-                            "title": "Classic Blue T-Shirt",
-                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148832/KOREAN/CARD/pizza-2068272_640.jpg",
-                            "subtitle": "100% Cotton, 200% Comfortable",
-                            "default_action": {
-                                "type": "web_url",
-                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
-                                "messenger_extensions": true,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                            },
-                            "buttons": [
-                                {
-                                    "title": "Shop Now",
-                                    "type": "web_url",
-                                    "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
-                                    "messenger_extensions": true,
-                                    "webview_height_ratio": "tall",
-                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                                }
-                            ]
-                        }
-                    ],
-                    "buttons": [
-                        {
-                            "title": "View More",
-                            "type": "postback",
-                            "payload": "payload"
-                        }
-                    ]
-                }
-            }
-        }
-    } else {
+    let
         response = {
             "attachment": {
                 "type": "template",
@@ -157,7 +88,7 @@ function handleMessage(sender_psid, received_message) {
                 }
             }
         }
-    }
+
 
     callSendAPI(sender_psid, response);
 }
@@ -170,8 +101,46 @@ function handlePostback(sender_psid, received_postback) {
 
     // Set the response based on the postback payload
     if (payload === 'menu') {
-        console.log(1)
-        handleMessage(sender_psid, 'menus')
+        response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "list",
+                    "elements": [
+                        {
+                            "title": "Classic T-Shirt Collection",
+                            "subtitle": "See all our colors",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
+                            "buttons": [
+                                {
+                                    "title": "View",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Classic T-Shirt Collection",
+                            "subtitle": "See all our colors",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
+                            "buttons": [
+                                {
+                                    "title": "View",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
     } else if (payload === 'wallet') {
         response = { "text": "Oops, try sending another image." }
     }
@@ -187,6 +156,8 @@ function callSendAPI(sender_psid, response) {
         },
         "message": response
     }
+
+    console.log(request_body)
 
     // Send the HTTP request to the Messenger Platform
     request({
