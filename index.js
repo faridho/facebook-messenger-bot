@@ -62,29 +62,98 @@ app.get('/webhook', (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
+    let response;
 
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Welcome to best Korean Resraurant",
-                    "subtitle": "Fresh, Organic & Delicious",
-                    "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592147855/KOREAN/CARD/cafe-984275_640.jpg",
-                    "buttons": [
+    if (received_message === 'menus') {
+        response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "list",
+                    "top_element_style": "compact",
+                    "elements": [
                         {
-                            "type": "postback",
-                            "title": "Select Menu",
-                            "payload": "menus",
+                            "title": "Classic T-Shirt Collection",
+                            "subtitle": "See all our colors",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
+                            "buttons": [
+                                {
+                                    "title": "View",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
                         },
                         {
-                            "type": "postback",
-                            "title": "Check Wallet",
-                            "payload": "wallet",
+                            "title": "Classic White T-Shirt",
+                            "subtitle": "See all our colors",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                                "messenger_extensions": false,
+                                "webview_height_ratio": "tall"
+                            }
+                        },
+                        {
+                            "title": "Classic Blue T-Shirt",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148832/KOREAN/CARD/pizza-2068272_640.jpg",
+                            "subtitle": "100% Cotton, 200% Comfortable",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                                "messenger_extensions": true,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                            },
+                            "buttons": [
+                                {
+                                    "title": "Shop Now",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
                         }
                     ],
-                }]
+                    "buttons": [
+                        {
+                            "title": "View More",
+                            "type": "postback",
+                            "payload": "payload"
+                        }
+                    ]
+                }
+            }
+        }
+    } else {
+        response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                        "title": "Welcome to best Korean Resraurant",
+                        "subtitle": "Fresh, Organic & Delicious",
+                        "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592147855/KOREAN/CARD/cafe-984275_640.jpg",
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Select Menu",
+                                "payload": "menu",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Check Wallet",
+                                "payload": "wallet",
+                            }
+                        ],
+                    }]
+                }
             }
         }
     }
@@ -99,33 +168,8 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload === 'menus') {
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "list",
-                    "top_element_style": "compact",
-                    "elements": [{
-                        "title": "Welcome to best Korean Resraurant",
-                        "subtitle": "Fresh, Organic & Delicious",
-                        "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592147855/KOREAN/CARD/cafe-984275_640.jpg",
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Select Menu",
-                                "payload": "menus",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Check Wallet",
-                                "payload": "wallet",
-                            }
-                        ],
-                    }]
-                }
-            }
-        }
+    if (payload === 'menu') {
+        handleMessage(sender_psid, 'menus')
     } else if (payload === 'wallet') {
         response = { "text": "Oops, try sending another image." }
     }
