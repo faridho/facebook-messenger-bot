@@ -106,6 +106,7 @@ function handlePostback(sender_psid, received_postback) {
                 "type": "template",
                 "payload": {
                     "template_type": "list",
+                    "top_element_style": "compact",
                     "elements": [
                         {
                             "title": "Classic T-Shirt Collection",
@@ -123,6 +124,57 @@ function handlePostback(sender_psid, received_postback) {
                             ]
                         },
                         {
+                            "title": "Classic White T-Shirt",
+                            "subtitle": "See all our colors",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                                "messenger_extensions": false,
+                                "webview_height_ratio": "tall"
+                            }
+                        },
+                        {
+                            "title": "Classic Blue T-Shirt",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148832/KOREAN/CARD/pizza-2068272_640.jpg",
+                            "subtitle": "100% Cotton, 200% Comfortable",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                                "messenger_extensions": true,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                            },
+                            "buttons": [
+                                {
+                                    "title": "Shop Now",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
+                        }
+                    ],
+                    "buttons": [
+                        {
+                            "title": "View More",
+                            "type": "postback",
+                            "payload": "payload"
+                        }
+                    ]
+                }
+            }
+        }
+    } else if (payload === 'wallet') {
+        response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "list",
+                    "top_element_style": "compact",
+                    "elements": [
+                        {
                             "title": "Classic T-Shirt Collection",
                             "subtitle": "See all our colors",
                             "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148833/KOREAN/CARD/hamburger-494706_640.jpg",
@@ -136,13 +188,50 @@ function handlePostback(sender_psid, received_postback) {
                                     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
                                 }
                             ]
+                        },
+                        {
+                            "title": "Classic White T-Shirt",
+                            "subtitle": "See all our colors",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                                "messenger_extensions": false,
+                                "webview_height_ratio": "tall"
+                            }
+                        },
+                        {
+                            "title": "Classic Blue T-Shirt",
+                            "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1592148832/KOREAN/CARD/pizza-2068272_640.jpg",
+                            "subtitle": "100% Cotton, 200% Comfortable",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                                "messenger_extensions": true,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                            },
+                            "buttons": [
+                                {
+                                    "title": "Shop Now",
+                                    "type": "web_url",
+                                    "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                                    "messenger_extensions": true,
+                                    "webview_height_ratio": "tall",
+                                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                                }
+                            ]
+                        }
+                    ],
+                    "buttons": [
+                        {
+                            "title": "View More",
+                            "type": "postback",
+                            "payload": "payload"
                         }
                     ]
                 }
             }
         }
-    } else if (payload === 'wallet') {
-        response = { "text": "Oops, try sending another image." }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
@@ -156,8 +245,6 @@ function callSendAPI(sender_psid, response) {
         },
         "message": response
     }
-
-    console.log(request_body)
 
     // Send the HTTP request to the Messenger Platform
     request({
