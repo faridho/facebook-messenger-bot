@@ -63,14 +63,15 @@ function handleMessage(sender_psid, received_message) {
 function handlePostback(sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
-    console.log(payload)
+
     const postbackData = {
         'menu': resources.menu,
-        'qty': resources.orderAgain,
-        'order': { "text": "Ask Address" }
+        'location': resources.location
+        //'qty': resources.orderAgain,
+        //'order': { "text": "Ask Address" }
     }
 
-    if (payload === 'menu' || payload === 'qty' || payload === 'order') {
+    /*if (payload === 'menu' || payload === 'qty' || payload === 'order') {
         response = postbackData[payload]
     } else {
         response = {
@@ -88,6 +89,12 @@ function handlePostback(sender_psid, received_postback) {
             ]
         }
 
+    }*/
+
+    if(payload === 'menu') {
+        response = postbackData[payload]
+    } else {
+        response = postbackData['location']
     }
 
     callSendAPI(sender_psid, response);
