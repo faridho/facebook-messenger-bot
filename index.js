@@ -70,26 +70,8 @@ function handlePostback(sender_psid, received_postback) {
         //'tix': resources.tix
     }
 
-    if (payload === "menu") {
-        response = postbackData[payload]
-    } else {
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "media",
-                    "elements": [
-                        {
-                            "media_type": "video",
-                            "url": "https://business.facebook.com/103593567765590/videos/630146130875938/"
-                        }
-                    ]
-                }
-            }
-        }
-    }
+    response = postbackData[payload]
     
-
     callSendAPI(sender_psid, response);
 }
 

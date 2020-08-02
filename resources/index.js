@@ -6,7 +6,7 @@ const welcome = {
             "elements": [{
                 "title": "Welcome to the bot korean fans info",
                 "subtitle": "Please tap button below to select info",
-                "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1596347553/KOREAN%20RESTAURANT/tvN-Logo-South-Korea-BPO.jpg",
+                "image_url": "https://res.cloudinary.com/duzt2dvg6/image/upload/v1596380442/KOREAN%20RESTAURANT/nUTWyGCsvuQERfw-800x450-noPad.jpg",
                 "buttons": [
                     {
                         "type": "postback",
@@ -59,7 +59,7 @@ const video = {
             "template_type": "media",
             "elements": [
                 {
-                    "media_type": "video",
+                    "media_type": "image|video",
                     "url": "https://business.facebook.com/103593567765590/videos/630146130875938/"
                 }
             ]
