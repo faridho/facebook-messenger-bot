@@ -104,17 +104,17 @@ const menu = {
 const location = {
     "attachments": [
         {
-          "title": "Facebook HQ",
-          "url": "https://www.facebook.com/l.php?u=https%....5-7Ocxrmg",
-          "type": "location",
-          "payload": {
-            "coordinates": {
-              "lat": 37.483872693672,
-              "long": -122.14900441942
+            "title": "Facebook HQ",
+            "url": "https://www.facebook.com/l.php?u=https%....5-7Ocxrmg",
+            "type": "location",
+            "payload": {
+                "coordinates": {
+                    "lat": 37.483872693672,
+                    "long": -122.14900441942
+                }
             }
-          }
         }
-      ]
+    ]
 }
 
-module.exports = { welcome, menu, orderAgain }
+module.exports = { welcome, menu, orderAgain, location }
