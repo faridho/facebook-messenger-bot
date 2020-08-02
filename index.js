@@ -66,8 +66,8 @@ function handlePostback(sender_psid, received_postback) {
     console.log(payload)
     const postbackData = {
         'menu': resources.menu,
-        'detail': resources.detail,
-        'tix': resources.tix
+        //'detail': resources.detail,
+        //'tix': resources.tix
     }
 
     if (payload === 'menu') {

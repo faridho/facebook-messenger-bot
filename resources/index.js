@@ -19,7 +19,7 @@ const welcome = {
     }
 }
 
-const cards = {
+const menu = {
     "attachment": {
         "type": "template",
         "payload": {
@@ -43,7 +43,7 @@ const cards = {
                 "buttons": [
                     {
                         "type": "postback",
-                        "title": "Buy Ticket",
+                        "title": "Buy Ticketqq",
                         "payload": "tix",
                     }
                 ],
@@ -52,4 +52,4 @@ const cards = {
     }
 }
 
-module.exports = { welcome, cards }
+module.exports = { welcome, menu }
